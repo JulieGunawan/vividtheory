@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Article = ({articles}) => {
-    
-    return 
+const Article = ({articles}) => 
     (
         <>
             {articles.map ((post) => {
@@ -18,6 +16,6 @@ const Article = ({articles}) => {
             })}
         </>
     )
-};
+;
 
 export default Article;

@@ -15,10 +15,6 @@ nav {
   list-style-type: none;
 }
 
-.right{
-  float:right;
-}
-
 .App-header img{
   width:30%;
   height:30%;
@@ -27,12 +23,10 @@ nav {
 .App-link {
   color: #61dafb;
 }
+.right{
+  float:right;
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Blog h1{
+  text-align: center;
 }

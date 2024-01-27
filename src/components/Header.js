@@ -11,9 +11,6 @@ const Header =() => (
                 </Link>
             </li>
         </ul>
-        <div className='right'>
-           search used tobe here
-        </div>
     </nav>
 );
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const SearchPage = ({content}) => {
     const location = useLocation();
@@ -23,15 +23,19 @@ const SearchPage = ({content}) => {
     return (
         <div className='searchPage'>
             <h1>Search Results:</h1>
-            <div>
+            <div className='searchResults'>
                 {filteredBlogs.map((post) => (
-                    <div key={post.id}>
+                    <Link className='list-result' to ={`/${post.slug}`} key={post.id}>
                         <h2>{post.title}</h2>
-                    </div>
+                        <p>{post.content}</p>
+                    </Link>
                 ))}    
+
+                
             </div>
         </div>
     );
 };
 
 export default SearchPage;
+

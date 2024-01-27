@@ -7,6 +7,7 @@ nav {
   display: block;
   height:75px;
 }
+
 .left {
   float:left;
 }
@@ -20,13 +21,19 @@ nav {
   height:30%;
   display: block;
 }
-.App-link {
-  color: #61dafb;
-}
-.right{
+
+.searchBar{
   float:right;
 }
 
-.Blog h1{
+.blogPage h1{
   text-align: center;
+}
+
+.blogs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 25px auto;
 }

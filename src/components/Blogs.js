@@ -5,7 +5,7 @@ import Content from './Content';
 
 const Blogs = () => {
     return (
-        <div className='Blog'>
+        <div className='blogPage'>
             <Header/>
             <h1>Blogs</h1>
             <Article articles={Content}/>

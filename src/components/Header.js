@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import SearchBar from './SearchBar';
-import Content from "./Content";
+
 const Header =() => (
     <nav >
         <ul className='left'>
@@ -13,7 +12,7 @@ const Header =() => (
             </li>
         </ul>
         <div className='right'>
-            <SearchBar content={Content}/>
+           search used tobe here
         </div>
     </nav>
 );

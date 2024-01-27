@@ -1,40 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-
-const SearchBar = ({content}) => {
+const SearchBar = () => {
     const [input,setInput]=useState('');
-    const [filteredBlogs, setFilteredBlogs] = useState([]);
+    const navigate = useNavigate();
 
-    const searchFunction = (event) => {
+    const handleSearch = (event) => {
         event.preventDefault();
-        setInput(event.target.value.toLowerCase());
-        console.log("search here: " + event.target.value);  
+        navigate(`/search?query=${input}`);
     }
 
-    useEffect(() => {
-        if (input ===""){
-            setFilteredBlogs([]);
-        } else {
-            const filteredPosts = content.filter((post) =>{
-            return post.title.toLowerCase().includes(input)
-    });
-        setFilteredBlogs(filteredPosts);}
-    },[input, content]);
+    const handleChange = (event) =>{
+        setInput(event.target.value)
+    };
 
-    return (
-        <>
+    return (  
         <div className="searchBar">
-            <input type="text" placeholder="Search..." value={input} onChange={searchFunction}/>
+            <form onSubmit={handleSearch}>
+                <input type="text" placeholder="Search..." value={input} onChange={handleChange}/>
+                <button type="submit">Search</button>
+            </form>   
         </div>
-        <div>
-            HelloWorld
-         {filteredBlogs.map((post) => (
-            <div key={post.id}>
-                <h2>{post.title}</h2>
-            </div>
-         ))}
-       </div>
-       </>
     );
 };
 

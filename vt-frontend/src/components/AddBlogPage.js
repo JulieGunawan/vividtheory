@@ -16,7 +16,7 @@ const AddBlogPage = () => {
     }
 
     return (
-        <div classname="addBlog">
+        <div className="addBlog">
             <h2>My New Blog</h2>
             <form onSubmit={handleSubmit}>
                 <table>

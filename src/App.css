@@ -37,3 +37,7 @@ nav {
   max-width: 1280px;
   margin: 25px auto;
 }
+
+.addBlog{
+  display:block;
+}

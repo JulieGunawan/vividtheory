@@ -12,3 +12,14 @@ const pool = new Pool({
 
 export default pool;
 
+// const Sequelize = require ('sequelize');
+
+// const database = new Sequelize({
+//     database:'vividtheory',
+//     dialect: 'postgres',
+//     operatorAliases: Sequelize.Op
+// })
+
+// const Title = database.define('title', {
+//     id:{type:Sequelize.}
+// })

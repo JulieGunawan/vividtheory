@@ -5,7 +5,7 @@ const AddBlogSection = () => {
     return(
         <div className="addBlog">
             <h2>Want to add your blog here?</h2>
-            <Link to ="/add-blog">
+            <Link to ="/create">
                 <button type="button">Yes! Add My Blog</button>
             </Link>   
         </div>

@@ -5,8 +5,9 @@ import Blogs from './components/Blogs';
 import Post from './components/Post';
 import SearchBar from './components/SearchBar';
 // import Content from './components/Content';
-// import SearchPage from './components/SearchPage';
+import SearchPage from './components/SearchPage';
 import AddBlogPage from './components/AddBlogPage';
+import DeleteBlogPage from './components/DeleteBlogPage';
 
 function App() {
   return (
@@ -16,8 +17,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Blogs/>} />
         <Route path="/:name" element={<Post/>} />
-        {/* <Route path="/search" element={<SearchPage content={Content} />} /> */}
-        <Route path="/add-blog" element={<AddBlogPage />} />
+        <Route path="/" element={<SearchPage />} /> 
+        {/* this needs to be checked if search will replace the Blog page */}
+        <Route path="/create" element={<AddBlogPage />} />
+        <Route path="/delete/:slug" element={<DeleteBlogPage />} />
       </Routes>
       
     </div>

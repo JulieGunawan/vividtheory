@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Header from './Header';
-
+import DeleteSection from './DeleteSection';
 
 const Post = () =>{
     const [articles, setArticles] = useState([]);
@@ -11,7 +11,6 @@ const Post = () =>{
             const response = await fetch('http://localhost:5000/blogs');
             const data = await response.json();
             setArticles(data);
-
         }catch(error){
             console.log(error.message);
         }
@@ -35,10 +34,9 @@ const Post = () =>{
             <Header />
             <h1>{blogPost.title}</h1>
             <p>{blogPost.content}</p>
+            <DeleteSection />
             <div className='other-blogs'>
                 <h3>You Might Also Like</h3>
-                {/* <Article articles={otherArticles}/> */}
-               
                 {otherArticles.map((post) => {
                     return (
                         <Link className='list-item' to={`/${post.slug}`} key={post.id}>

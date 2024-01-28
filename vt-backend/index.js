@@ -16,15 +16,13 @@ app.use(express.json());
 //Create a blog
 app.post("/blogs", async (req, res) => {
     try {
-        const {title, slug, content, image, created_at, updated_at} = req.body;
-        const newBlog = await pool.query("INSERT INTO blogs (title, slug, content, image, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", 
-        [title, slug, content, image, created_at, updated_at]);
+        const {title, slug, content, image, created_at, updated_at, published_at} = req.body;
+        const newBlog = await pool.query("INSERT INTO blogs (title, slug, content, image, created_at, updated_at, published_at) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *", 
+        [title, slug, content, image, created_at, updated_at, published_at]);
 
         res.json(newBlog.rows);
-        // next();
     } catch(error) {
         console.log(error.message);
-        // return next(error);
     }
 });
 
@@ -33,17 +31,29 @@ app.get("/blogs", async (req, res) => {
     try{    
         const allBlogs = await pool.query("SELECT * FROM blogs");
         res.json(allBlogs.rows);
-        // next();
     }catch(error){
         console.log(error.message);
     }
 });
 
-//get a blog in blogs
-app.get("/blogs/:id", async (req, res) => {
+//get a blog in blogs using id
+// app.get("/blogs/:id", async (req, res) => {
+//     try{
+//         const { id } = req.params;
+//         const blog = await pool.query("SELECT * FROM blogs WHERE id = $1", [id]);
+//         res.json(blog.rows[0]);
+//         // next();
+//     } catch(error) {
+//         console.log(error.message);
+//     }
+// });
+
+//get a blog in blogs using slug
+app.get("/blogs/:slug", async (req, res) => {
     try{
-        const { id } = req.params;
-        const blog = await pool.query("SELECT * FROM blogs WHERE id = $1", [id]);
+        const { slug } = req.params;
+        console.log(req.params);
+        const blog = await pool.query("SELECT * FROM blogs WHERE slug = $1", [slug]);
         res.json(blog.rows[0]);
         // next();
     } catch(error) {

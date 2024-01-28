@@ -1,22 +1,39 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 
-const Article = ({articles}) => 
-    (
+const Article = () => {
+    const [articles, setArticles] = useState([]);
+
+    const getBlogs = async () => {
+        try{
+            const response = await fetch('http://localhost:5000/blogs');
+            const data = await response.json();
+            setArticles(data);
+
+        }catch(error){
+            console.log(error.message);
+        }
+    }
+    useEffect (()=>{
+        getBlogs();
+    },[]);
+
+    return  (
         <div className='blogs'>
             {articles.map((post) => {
-                return (
-                    <Link className='list-item' to={`/${post.slug}`} key={post.id}>
-                        <div className='blog-post'>
-                            <h3>{post.title}</h3>
-                            {post.content}
-                            <p>Published at:{post.published_at}</p>
-                        </div>
-                    </Link>
-                );
-            })}
+            return (
+                <Link className='list-item' to={`/${post.slug}`} key={post.id}>
+                    <div className='blog-post'>
+                        <h3>{post.title}</h3>
+                        {post.content}
+                        <p>Published at:{post.published_at}</p>
+                    </div>
+                </Link>
+            );
+        })} 
+
         </div>
-    )
-;
+    );
+}
 
 export default Article;

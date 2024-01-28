@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import Header from './Header';
 //functionality to add a Blog
 const AddBlogPage = () => {
 
@@ -40,6 +40,7 @@ const AddBlogPage = () => {
 
     return (
         <div className="addBlog">
+            <Header/>
             <h2>My New Blog</h2>
             <form onSubmit={handleSubmit}>
                 <table>

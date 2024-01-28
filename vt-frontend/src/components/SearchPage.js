@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-const SearchPage = ({content}) => {
+const SearchPage = () => {
     const location = useLocation();
     const searchParams= new URLSearchParams(location.search);
     const query= searchParams.get('query');
@@ -12,12 +12,12 @@ const SearchPage = ({content}) => {
         if (!query || query === "") {
             setFilteredBlogs([]);
         } else {
-            const filteredPosts = content.filter((post) => 
+            const filteredPosts = filteredBlogs.filter((post) => 
                  post.title.toLowerCase().includes(query.toLowerCase())
             );
             setFilteredBlogs(filteredPosts);
         }
-    },[query, content]);
+    },[query, filteredBlogs]);
 
     return (
         <div className='searchPage'>

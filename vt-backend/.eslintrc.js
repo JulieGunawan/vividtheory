@@ -1,6 +1,6 @@
 module.exports = {
     "env": {
-        "browser": true,
+        "node": true,
         "es2021": true
     },
     "extends": [
@@ -17,7 +17,7 @@ module.exports = {
                 ".eslintrc.{js,cjs}"
             ],
             "parserOptions": {
-                "sourceType": "script",
+                "sourceType": "script"
             }
         }
     ],
@@ -29,5 +29,21 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
     }
 }

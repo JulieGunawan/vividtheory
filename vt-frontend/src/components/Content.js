@@ -1,5 +1,5 @@
 //this will be deleted as it will be replaced by postgres
-
+import React from 'react';
 const Content = [
     {
         id: 1,

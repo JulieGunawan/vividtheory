@@ -1,18 +1,41 @@
 import React, {useState} from 'react';
 
-
+//functionality to add a Blog
 const AddBlogPage = () => {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [slug,setSlug]=useState('');
     const [image, setImage] = useState('');
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();    
-        alert("Your blog has been added");
-        setTitle('');
-        setContent('');
-        setImage('');
+        const created_at = new Date();
+        const updated_at = new Date();
+        try{
+
+            const blog = {title, content, slug, image, created_at, updated_at};
+            
+            const response = await fetch('http://localhost:5000/blogs', {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(blog),  
+            });
+            console.log(response);
+
+            if (response.ok) {
+                alert("Your blog has been added");
+                setTitle('');
+                setSlug('');
+                setContent('');
+                setImage('');
+            }
+        } catch(error){
+            console.log(error.message);          
+        };
+        
     }
 
     return (
@@ -36,11 +59,18 @@ const AddBlogPage = () => {
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <label>Slug (for SEO):</label>
+                    </td>
+                    <td>
+                        <textarea value={slug} onChange={(e) => setSlug(e.target.value)} />
+                    </td>
+                </tr>
+                <tr>
                     <td><label>Image URL:</label></td>
                     <td>
                     <input type="text" size="40" value={image} onChange={(e) => setImage(e.target.value)} />
                     </td>
-               
                 </tr>
                 </table>
                 <button type="submit">Submit</button>

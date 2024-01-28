@@ -56,8 +56,11 @@ app.put("/blogs/:id", async (req, res, next) => {
     try{
         const { id } = req.params;
         const { title, slug, content, image, created_at, updated_at } = req.body;
-        const updateBlog = await pool.query("UPDATE blogs SET title = $1, slug = $2, content = $3, image = $4, created_at=$5, updated_at=$6 WHERE id = $7",
-            [title, slug, content, image, created_at, updated_at, id]);
+        console.log(req.body);
+        // const updateBlog = await pool.query("UPDATE blogs SET title = $1, slug = $2, content = $3, image = $4, created_at=$5, updated_at=$6 WHERE id = $7",
+        //     [title, slug, content, image, created_at, updated_at, id]);
+        await pool.query("UPDATE blogs SET title = $1, slug = $2, content = $3, image = $4, created_at=$5, updated_at=$6 WHERE id = $7",
+        [title, slug, content, image, created_at, updated_at, id]);
         res.json("Blog was updated");
         next();
     } catch (error){    
@@ -69,7 +72,8 @@ app.put("/blogs/:id", async (req, res, next) => {
 app.delete("/blogs/:id", async (req, res, next) => {
     try{
         const { id } = req.params;
-        const deleteBlog = await pool.query("DELETE FROM blogs WHERE id = $1", [id]);
+        // const deleteBlog = await pool.query("DELETE FROM blogs WHERE id = $1", [id]);
+        await pool.query("DELETE FROM blogs WHERE id = $1", [id]);
         res.json("Blog was deleted");
         next();
     } catch(error){

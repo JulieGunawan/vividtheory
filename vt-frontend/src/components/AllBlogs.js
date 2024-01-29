@@ -11,9 +11,9 @@ const AllBlogs = () => {
         try{
             const response = await fetch(`http://localhost:5000/blogs?page=${page}&limit=6`);
             const data = await response.json();
-            const newData = data.filter((post) => post.deleted_at == null && post.published_at!=null);
-            console.log(newData)
-            setArticles(newData);
+            
+            console.log(data)
+            setArticles(data);
 
         }catch(error){
             console.log(error.message);
@@ -22,7 +22,7 @@ const AllBlogs = () => {
 
     const nextPage = () =>{
         if (isAtEnd){
-            Math.ceil(articles.length/6)
+            setPage(Math.ceil(articles.length/6))
         } else {
             setPage(page+1);
         }

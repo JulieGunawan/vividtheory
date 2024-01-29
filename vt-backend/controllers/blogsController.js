@@ -1,4 +1,5 @@
 const Blog = require('../models/Blog');
+const { Op } = require("sequelize");
 
 module.exports = {
     getAllBlogs: async (req, res) => {
@@ -11,19 +12,31 @@ module.exports = {
             const allBlogs = await Blog.findAll({
                 order:[
                     ['published_at', 'DESC']
-                ]
+                ],
+                limit: limit,
+                offset: startIndex,
+                
+                where: {
+                    deleted_at: {
+                        [Op.is]: null,
+                    },
+                    published_at:{
+                        [Op.ne]: null
+                    }
+                }
+                  
             });
             
-            const publishedBlogs = allBlogs.filter((blog) => blog.published_at != null && blog.deleted_at == null);
+            // const publishedBlogs = allBlogs.filter((blog) => blog.published_at != null);
 
-            const results = publishedBlogs.slice(startIndex, endIndex);
+            // const results = publishedBlogs.slice(startIndex, endIndex);
 
             console.log("page",page);
             console.log("limit",limit);
             console.log("start",startIndex);
             console.log("end",endIndex);
             
-            res.json(results);
+            res.json(allBlogs);
         } catch (err){
             console.log(err.message);
         }
@@ -42,6 +55,29 @@ module.exports = {
           console.log(err.message);
       } 
     },
+    getRandomBlogs: async (req, res) => {
+        try{
+        //   console.log("here",req.params.slug);
+        const randomBlogs = [];
+        for (var i = 0; i < 4; i++) {
+            const randomId = parseInt(Math.floor(Math.random() * 100) + 1);
+            console.log("random id is", randomId);
+            const blog = await Blog.findOne({where: {id: randomId}});
+            console.log("blog is", blog);
+            randomBlogs.push(blog);
+        }
+        //   const randomId = Math.floor(Math.random() * 100) + 1;
+        //     const blog = await Blog.findOne({where: {id: randomId}});
+            console.log("blog is", randomBlogs);
+            if (randomBlogs){
+              res.json(randomBlogs);
+          } else {
+              res.status(404).json({message: "Blog not found"});
+          }
+        } catch(err){
+            console.log(err.message);
+        } 
+      },
     createOneBlog: async (req, res) => {
         try{
             const newBlog = await Blog.create(req.body);

@@ -8,7 +8,7 @@ router.get("/", controller.getAllBlogs);
 
 router.get("/:slug", controller.getOneBlog);
 
-
+router.get("/random", controller.getRandomBlogs);
 router.post("/", controller.createOneBlog);
 
 router.put("/:id", controller.updateOneBlog);

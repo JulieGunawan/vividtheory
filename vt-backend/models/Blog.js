@@ -1,3 +1,4 @@
+
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -14,10 +15,7 @@ const Blog = db.define('blog',{
     slug: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-            notEmpty: true //Ensure the field is not empty
-        }
+        unique: true
     },
     content: {
         type: Sequelize.TEXT,
@@ -30,8 +28,17 @@ const Blog = db.define('blog',{
     },
     deleted_at: {
         type: Sequelize.DATE,
-
+    },
+    createdAt:{
+      type: Sequelize.DATE,
+      allowNull: false
+    },
+    updatedAt:{
+      type: Sequelize.DATE,
+      allowNull: false
     }
+}, {
+  tableName: 'Blogs'
 });
 
 module.exports = Blog;

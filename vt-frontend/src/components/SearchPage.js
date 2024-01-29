@@ -3,23 +3,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 const SearchPage = ({articles}) => {
-    // const location = useLocation();
-    // const searchParams= new URLSearchParams(location.search);
-    // const query= searchParams.get('query');
-
-    // const [filteredBlogs, setFilteredBlogs] = useState([]);
-
-    // useEffect(() => {
-    //     if (!query || query === "") {
-    //         setFilteredBlogs([]);
-    //     } else {
-    //         const filteredPosts = filteredBlogs.filter((post) => 
-    //              post.title.toLowerCase().includes(query.toLowerCase())
-    //         );
-    //         setFilteredBlogs(filteredPosts);
-    //     }
-    // },[query, filteredBlogs]);
-
+    // const[currentPage, setCurrentPage] = useState(1);
+    
     return (
         <div className='searchPage'>
             <h2>Search Results:</h2>
@@ -28,10 +13,9 @@ const SearchPage = ({articles}) => {
                     <Link className='list-result' to ={`/${post.slug}`} key={post.id}>
                         <h2>{post.title}</h2>
                         <p>{post.content}</p>
+                        <p>Published at:{post.published_at}</p>
                     </Link>
-                ))}    
-
-                
+                ))}            
             </div>
         </div>
     );

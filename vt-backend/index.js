@@ -22,8 +22,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-//Routes for API calls
+//Routes for blogs API calls
 app.use('/blogs',router);
 
 const PORT = 5000;

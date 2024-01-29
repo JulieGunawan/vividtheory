@@ -1,16 +1,9 @@
-
 const express = require("express");
 const router = express.Router();
 const Blog = require("../models/Blog");
+const controller = require("../controllers/blogsController");
 
-router.get("/", async (req, res) => {
-    try{
-        const blogs = await Blog.findAll();
-        res.json(blogs);
-    } catch (err){
-        console.log(err);
-    }
-});
+router.get("/", controller.getAllBlogs);
     
 
 router.get("/:slug", async (req, res) => {
@@ -25,6 +18,7 @@ router.get("/:slug", async (req, res) => {
         console.log(err);
     }
 });
+
 
 router.post("/", async (req, res) => {
     try{

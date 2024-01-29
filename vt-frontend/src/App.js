@@ -1,17 +1,14 @@
 import './App.css';
 import React from 'react';
 import { Routes, Route} from 'react-router-dom';
-// import Blogs from './components/Blogs';
 import Post from './components/Post';
-
-// import Content from './components/Content';
-// import SearchPage from './components/SearchPage';
 import HomePage from './components/HomePage';
 import AllBlogs from './components/AllBlogs';
 import AddBlogPage from './components/AddBlogPage';
 import DeleteBlogPage from './components/DeleteBlogPage';
 
 function App() {
+
   return (
     <div className="App">
       <Routes>

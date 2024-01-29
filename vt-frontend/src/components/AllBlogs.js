@@ -1,32 +1,13 @@
-// import React from 'react';
-// import Header from './Header';
-// // import SearchBar from './SearchBar';
-// import Article from './Article';
-// // import AddBlogSection from './AddBlogSection';
-// const HomePage = () => {
-//     return (
-//         <div className='homePage'>
-//             <Header/>
-//             <h1>Blogs</h1>
-//             {/* <SearchBar/> */}
-//             <Article />
-//             {/* <AddBlogSection /> */}
-//         </div>
-//     );
-// };
-
-// export default HomePage;
-
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from './Header';
 
 const AllBlogs = () => {
     const [articles, setArticles] = useState([]);
-
-    const getBlogs = async () => {
+    const [page, setPage] = useState(1);
+    const getBlogs = async (page) => {
         try{
-            const response = await fetch('http://localhost:5000/blogs');
+            const response = await fetch(`http://localhost:5000/blogs?page=${page}&limit=6`);
             const data = await response.json();
             const newData = data.filter((post) => post.deleted_at == null && post.published_at!=null);
             console.log(newData)
@@ -36,9 +17,18 @@ const AllBlogs = () => {
             console.log(error.message);
         }
     }
+
+    const nextPage = () =>{
+        setPage(page+1);
+    };
+
+    const previousPage = () =>{
+        setPage(page-1);
+    }
+
     useEffect (()=>{
-        getBlogs();
-    },[]);
+        getBlogs(page);
+    },[page]);
 
     return  (
         <div className='blogs'>
@@ -55,7 +45,8 @@ const AllBlogs = () => {
                 </Link>
             );
         })} 
-
+        <button className='previous' onClick={previousPage}>prev</button>
+        <button className='next' onClick={nextPage}>next</button>
         </div>
     );
 }

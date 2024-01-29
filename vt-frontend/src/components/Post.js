@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import Header from './Header';
 import DeleteSection from './DeleteSection';
 
 const Post = () =>{
     const [articles, setArticles] = useState([]);
-
+    const [randomBlogs, setRandomBlogs] = useState([]);
     const {name} = useParams();
     const getBlogs = async () => {
         try{
@@ -18,19 +18,24 @@ const Post = () =>{
             console.log(error.message);
         }
     }
+
+    const generateRandomBlogs = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/blogs/random');
+            const randomData = await response.json();
+            setRandomBlogs(randomData);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     useEffect (()=>{
         getBlogs();
+        generateRandomBlogs();
     },[]);
 
     
-    // const blogPost = articles.find((post) => post.slug === name);
-
-    // if (!blogPost) {
-    //     return <div>Post not found</div>;
-    // }
-
-    // const otherArticles = articles.filter(post => post.slug !== name);
-    // console.log(otherArticles);
+  
 
     return (
         <>
@@ -40,7 +45,7 @@ const Post = () =>{
             <DeleteSection />
             <div className='other-blogs'>
                 <h3>You Might Also Like</h3>
-                {/* {otherArticles.map((post) => {
+                {randomBlogs.map((post) => {
                     return (
                         <Link className='list-item' to={`/${post.slug}`} key={post.id}>
                             <div className='blog-post'>
@@ -51,7 +56,7 @@ const Post = () =>{
                             </div>
                         </Link>
                     );
-                })} */}
+                })}
               
             </div>
         </>

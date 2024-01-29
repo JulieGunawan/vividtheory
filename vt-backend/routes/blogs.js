@@ -6,8 +6,8 @@ const controller = require("../controllers/blogsController");
 router.get("/", controller.getAllBlogs);
     
 
-router.get("/:slug", controller.getOneBlog);
-
+router.get("/getBySlug/:slug", controller.getBlogBySlug);
+router.get("/getById/:id", controller.getBlogById);
 router.get("/random", controller.getRandomBlogs);
 router.post("/", controller.createOneBlog);
 

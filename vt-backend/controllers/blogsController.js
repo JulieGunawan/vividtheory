@@ -6,7 +6,7 @@ module.exports = {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 6;
         const startIndex = (page - 1) * limit;
-        const endIndex = page * limit;
+        // const endIndex = page * limit;
 
         try{     
             const allBlogs = await Blog.findAll({
@@ -27,25 +27,16 @@ module.exports = {
                   
             });
             
-            // const publishedBlogs = allBlogs.filter((blog) => blog.published_at != null);
-
-            // const results = publishedBlogs.slice(startIndex, endIndex);
-
-            console.log("page",page);
-            console.log("limit",limit);
-            console.log("start",startIndex);
-            console.log("end",endIndex);
-            
             res.json(allBlogs);
         } catch (err){
             console.log(err.message);
         }
     },
-    getOneBlog: async (req, res) => {
+    getBlogBySlug: async (req, res) => {
       try{
-        console.log("here",req.params.slug);
+        // console.log("here",req.params.slug);
           const blog = await Blog.findOne({where: {slug: req.params.slug}});
-          console.log("blog is", blog);
+        //   console.log("blog is", blog);
           if (blog){
             res.json(blog);
         } else {
@@ -55,18 +46,32 @@ module.exports = {
           console.log(err.message);
       } 
     },
+    getBlogById: async (req, res) => {
+        try{
+          console.log("here",req.params.id);
+            const blog = await Blog.findOne({where: {id: req.params.id}});
+          //   console.log("blog is", blog);
+            if (blog){
+              res.json(blog);
+          } else {
+              res.status(404).json({message: "Blog not found"});
+          }
+        } catch(err){
+            console.log(err.message);
+        } 
+      },
     getRandomBlogs: async (req, res) => {
         try{
-        //   console.log("here",req.params.slug);
+          console.log("random part");
         const randomBlogs = [];
         for (var i = 0; i < 4; i++) {
-            const randomId = parseInt(Math.floor(Math.random() * 100) + 1);
+            const randomId = parseInt(Math.abs(Math.floor(Math.random() * 10) +1));
             console.log("random id is", randomId);
             const blog = await Blog.findOne({where: {id: randomId}});
             console.log("blog is", blog);
             randomBlogs.push(blog);
         }
-        //   const randomId = Math.floor(Math.random() * 100) + 1;
+        //   const randomId = Math.abs(Math.floor(Math.random() * 100) -2);
         //     const blog = await Blog.findOne({where: {id: randomId}});
             console.log("blog is", randomBlogs);
             if (randomBlogs){

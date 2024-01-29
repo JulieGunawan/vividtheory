@@ -1,3 +1,43 @@
+:root {
+  --radius--full: 100px;
+  --5-surface--main: #1e1e1e;
+  --2-secondary--main: #1bb0bc;
+  --radius--default: 4px;
+  --6-background--on-main: #1e1e1e;
+  --size--2: 8px;
+  --6-background--main: white;
+  --font-family: "Linotype Neue Kabel", sans-serif;
+  --size--6: 24px;
+  --size--8: 32px;
+  --size--5: 20px;
+  --7-stroke--50: #919191;
+  --size--4: 16px;
+  --size--none: 0px;
+  --outline--outline: #e7e7eb;
+  --2-secondary--container: #e9f8f9;
+  --3tertiary--main: #756ecb;
+  --outline--outlinetwo: #f2f3ff;
+  --radius--xs: 16px;
+  --radius--s: 24px;
+  --1-primary--main: #131438;
+  --size--10: 40px;
+  --size--9: 36px;
+  --size--3: 12px;
+  --radius--xxs: 8px;
+  --size--1: 4px;
+  --4-quaternary--main: #ba5db6;
+  --size--0-5: 0px;
+  --size--7: 28px;
+  --radius--none: 0px;
+  --radius--md: 32px;
+  --radius--lg: 40px;
+  --radius--xl: 48px;
+  --radius--xxl: 56px;
+  --radius--xxxl: 64px;
+  --2-secondary--on-main: white;
+  --2-secondary--on-container: white;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

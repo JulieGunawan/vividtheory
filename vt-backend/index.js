@@ -26,7 +26,6 @@ app.use(express.json());
 //Routes for API calls
 app.use('/blogs',router);
 
-// eslint-disable-next-line no-undef
 const PORT = 5000;
 
 app.listen(PORT,() =>{

@@ -28,6 +28,7 @@ router.get("/:slug", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try{
+        console.log("here",req.body);
         const newBlog = await Blog.create(req.body);
         res.json(newBlog);
     }catch(err){

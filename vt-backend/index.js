@@ -1,8 +1,5 @@
 const express = require("express");
-// const exphbs = require("express-handlebars");
-// const bodyParser = require("body-parser");
 const cors = require("cors");
-// const path = require("path");
 const database = require("./db");
 const dotenv = require('dotenv');
 const { Sequelize } = require("sequelize");
@@ -23,7 +20,8 @@ const app = express();
 
 // middleware
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
+
 
 //Routes for API calls
 app.use('/blogs',router);

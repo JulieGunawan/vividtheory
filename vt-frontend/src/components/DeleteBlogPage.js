@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams, Link} from 'react-router-dom';
 import Dialog from './Dialog';
 import Header from './Header';
 
@@ -27,10 +27,21 @@ const DeleteBlogPage = () => {
 
     const removeBlog = async (id) => {
         try{
-            await fetch(`http://localhost:5000/blogs/${id}`, {
-                method: "DELETE",
+            const response = await fetch(`http://localhost:5000/blogs/${id}`, {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify({deleted_at: new Date()}),
             });
-            setArticle([]);
+
+            if (response.ok){
+                alert("Blog is succesfully deleted");
+                setArticle([]);
+            } else {
+                console.error("Failed to delete blog");
+            }
+            
         } catch(error){
             console.log(error.message);
         }       
@@ -73,7 +84,8 @@ const DeleteBlogPage = () => {
                 <h1>{article.title}</h1>
                 {article.content}
                 <button onClick={handleDelete}>
-                    {empty ? "Click logo to go back" : "Delete"}</button>
+                    Delete</button>
+                <Link to = "/"><button>Cancel</button></Link>
             </div>
             {dialog.isLoading && (
                 <Dialog

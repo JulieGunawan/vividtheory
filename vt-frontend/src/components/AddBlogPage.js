@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Header from './Header';
+import {Link} from 'react-router-dom';
 //functionality to add a Blog
 const AddBlogPage = () => {
 
@@ -8,14 +9,13 @@ const AddBlogPage = () => {
     const [slug,setSlug]=useState('');
     const [image, setImage] = useState('');
 
+ 
     const handleSubmit = async (e)=>{
         e.preventDefault();    
-        const created_at = new Date();
-        const updated_at = new Date();
         try{
-
-            const blog = {title, content, slug, image, created_at, updated_at};
-            
+            const published_at = new Date();
+            const blog = {title, content, slug, image, published_at};
+            console.log(blog);
             const response = await fetch('http://localhost:5000/blogs', {
               method: "POST",
               headers: {
@@ -74,8 +74,8 @@ const AddBlogPage = () => {
                     </td>
                 </tr>
                 </table>
-                <button type="button">Save Draft</button>
-                <button type="submit">Publish</button>
+                <Link to="/"><button type="button">Cancel </button></Link>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )

@@ -10,7 +10,8 @@ const Post = () =>{
         try{
             const response = await fetch('http://localhost:5000/blogs');
             const data = await response.json();
-            setArticles(data);
+            const newData = data.filter((post) => post.deleted_at == null);
+            setArticles(newData);
         }catch(error){
             console.log(error.message);
         }

@@ -82,9 +82,10 @@ const DeleteBlogPage = () => {
             <Header />
             <div className='deletePost'>
                 <h1>{article.title}</h1>
-                {article.content}
+                    {article.content}
+                    {empty? <Link to ="/"><button>Back</button></Link>: 
                 <button onClick={handleDelete}>
-                    Delete</button>
+                    Delete</button>}
                 <Link to = "/"><button>Cancel</button></Link>
             </div>
             {dialog.isLoading && (

@@ -43,8 +43,9 @@ const Post = () =>{
                         <Link className='list-item' to={`/${post.slug}`} key={post.id}>
                             <div className='blog-post'>
                                 <h3>{post.title}</h3>
-                                {post.content}
-                                <p>Published at:{post.published_at}</p>
+                                <div dangerouslySetInnerHTML={{__html: post.content}} />
+                                <p>Published at: {new Date(post.published_at).toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>    
+
                             </div>
                         </Link>
                     );

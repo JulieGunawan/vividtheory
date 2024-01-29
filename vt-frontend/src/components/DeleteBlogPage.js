@@ -82,7 +82,8 @@ const DeleteBlogPage = () => {
             <Header />
             <div className='deletePost'>
                 <h1>{article.title}</h1>
-                    {article.content}
+                <div dangerouslySetInnerHTML={{__html: article.content}} />
+                <p>Published at: {new Date(article.published_at).toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>    
                     {empty? <Link to ="/"><button>Back</button></Link>: 
                 <button onClick={handleDelete}>
                     Delete</button>}

@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import Header from './Header';
 
 const AllBlogs = () => {
+    const [isAtEnd, setIsAtEnd] = useState(false);
+    const [isAtBeginning, setIsAtBeginning] = useState(true);
     const [articles, setArticles] = useState([]);
     const [page, setPage] = useState(1);
     const getBlogs = async (page) => {
@@ -19,17 +21,28 @@ const AllBlogs = () => {
     }
 
     const nextPage = () =>{
-        setPage(page+1);
+        if (isAtEnd){
+            Math.ceil(articles.length/6)
+        } else {
+            setPage(page+1);
+        }
     };
 
     const previousPage = () =>{
-        setPage(page-1);
+        if (isAtBeginning){
+            setPage(1);
+        }else{
+            setPage(page-1);
+        }
     }
 
     useEffect (()=>{
         getBlogs(page);
+        setIsAtBeginning(page === 1);
+        setIsAtEnd(page === Math.ceil(articles.length/6));
     },[page]);
 
+    
     return  (
         <div className='blogs'>
             <Header />
@@ -39,14 +52,15 @@ const AllBlogs = () => {
                 <Link className='list-item' to={`/${post.slug}`} key={post.id}>
                     <div className='blog-post'>
                         <h3>{post.title}</h3>
-                        {post.content}
-                        <p>Published at:{post.published_at}</p>
+                        <div dangerouslySetInnerHTML={{__html: post.content}} />
+                        <p>Published at: {new Date(post.published_at).toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>    
+
                     </div>
                 </Link>
             );
         })} 
-        <button className='previous' onClick={previousPage}>prev</button>
-        <button className='next' onClick={nextPage}>next</button>
+        {isAtBeginning ? null : <button className='previous' onClick={previousPage}>prev</button>}
+        {isAtEnd ? null : <button className='next' onClick={nextPage}>next</button>}
         </div>
     );
 }

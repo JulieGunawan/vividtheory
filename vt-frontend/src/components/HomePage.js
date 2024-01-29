@@ -9,8 +9,6 @@ const HomePage = () => {
             <Header/>
             <h1>Blogs</h1>
             <SearchBar/>
-            {/* <Article /> */}
-            {/* <AddBlogSection /> */}
         </div>
     );
 };

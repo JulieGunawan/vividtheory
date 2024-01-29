@@ -59,13 +59,13 @@ h1{
   text-align: center;
 }
 
-.blogs{
+/* .blogs{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   max-width: 1280px;
   margin: 25px auto;
-}
+} */
 
 .addBlog{
   display:block;

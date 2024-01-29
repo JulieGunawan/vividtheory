@@ -28,7 +28,8 @@ const AllBlogs = () => {
         try{
             const response = await fetch('http://localhost:5000/blogs');
             const data = await response.json();
-            const newData = data.filter((post) => post.deleted_at == null);
+            const newData = data.filter((post) => post.deleted_at == null && post.published_at!=null);
+            console.log(newData)
             setArticles(newData);
 
         }catch(error){

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "server for vt-blog",
   "main": "index.js",
-  "type": "module",
   "license": "ISC",
   "scripts": {
     "start": "node index",

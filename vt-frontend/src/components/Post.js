@@ -10,7 +10,7 @@ const Post = () => {
   const getBlogs = async () => {
     try {
       console.log('slug is: ' + name);
-      const response = await fetch(`http://localhost:5000/blogs/${name}`);
+      const response = await fetch(`http://localhost:5000/blogs/getBySlug/${name}`);
       const data = await response.json();
       // const newData = data.filter((post) => post.deleted_at == null);
       setArticles(data);
@@ -39,6 +39,14 @@ const Post = () => {
       <Header />
       <h1>{articles.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: articles.content }} />
+      <p>
+        Published at:{' '}
+        {new Date(articles.published_at).toLocaleString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        })}
+      </p>
       <DeleteSection />
       <div className="other-blogs">
         <h3>You Might Also Like</h3>

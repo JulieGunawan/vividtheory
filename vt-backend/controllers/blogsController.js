@@ -61,20 +61,27 @@ module.exports = {
     try {
       console.log('random part');
       const randomBlogs = [];
-      for (var i = 0; i < 4; i++) {
-        const randomId = parseInt(Math.abs(Math.floor(Math.random() * 10) + 1));
-        console.log('random id is', randomId);
-        const blog = await Blog.findOne({ where: { id: randomId } });
-        console.log('blog is', blog);
-        randomBlogs.push(blog);
+      const usedIds = new Set();
+
+      while (randomBlogs.length < 4) { // Ensure we have 4 unique blogs
+        const randomId = Math.floor(Math.random() * 20) + 1;
+        
+        if (!usedIds.has(randomId)) {
+          console.log('random id is', randomId);
+          const blog = await Blog.findOne({ where: { id: randomId } });
+          
+          if (blog) {
+            randomBlogs.push(blog);
+            usedIds.add(randomId);
+          }
+        }
       }
-      //   const randomId = Math.abs(Math.floor(Math.random() * 100) -2);
-      //     const blog = await Blog.findOne({where: {id: randomId}});
+      
       console.log('blog is', randomBlogs);
-      if (randomBlogs) {
+      if (randomBlogs.length > 0) {
         res.json(randomBlogs);
       } else {
-        res.status(404).json({ message: 'Blog not found' });
+        res.status(404).json({ message: 'Blogs not found' });
       }
     } catch (err) {
       console.log(err.message);

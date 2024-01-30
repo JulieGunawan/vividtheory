@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+// import Button from '@mui/material/Button';
+import {Box} from '@mui/system';
+// import {Card} from '@mui/material';
 
 const AllBlogs = () => {
   const [isAtEnd, setIsAtEnd] = useState(false);
@@ -22,19 +25,11 @@ const AllBlogs = () => {
   };
 
   const nextPage = () => {
-    if (isAtEnd) {
-      setPage(Math.ceil(articles.length / 6));
-    } else {
-      setPage(page + 1);
-    }
+    setPage((prevPage) => prevPage + 1);
   };
 
   const previousPage = () => {
-    if (isAtBeginning) {
-      setPage(1);
-    } else {
-      setPage(page - 1);
-    }
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   useEffect(() => {
@@ -47,12 +42,13 @@ const AllBlogs = () => {
     <div className="blogs">
       <Header />
       <h1>All Blogs</h1>
+      <Box sx={{ color: 'text.secondary' }}>Sessions</Box>
       {articles.map((post) => {
         return (
           <Link className="list-item" to={`/${post.slug}`} key={post.id}>
             <div className="blog-post">
               <h3>{post.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              <div dangerouslySetInnerHTML={{ __html: post.content.substring(0,150) + '...' }} />
               <p>
                 Published at:{' '}
                 {new Date(post.published_at).toLocaleString('en-US', {
@@ -65,16 +61,18 @@ const AllBlogs = () => {
           </Link>
         );
       })}
-      {isAtBeginning ? null : (
-        <button className="previous" onClick={previousPage}>
-          prev
-        </button>
-      )}
-      {isAtEnd ? null : (
-        <button className="next" onClick={nextPage}>
-          next
-        </button>
-      )}
+      <div>
+        {!isAtBeginning && (
+          <button className="previous" onClick={previousPage}>
+            prev
+          </button>
+        )}
+        {!isAtEnd && (
+          <button className="next" onClick={nextPage}>
+            next
+          </button>
+        )}
+      </div>
     </div>
   );
 };

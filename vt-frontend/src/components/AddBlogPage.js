@@ -29,6 +29,8 @@ const AddBlogPage = () => {
         setSlug('');
         setContent('');
         setImage('');
+      } else {
+        alert('You might enter a duplicate slug');
       }
     } catch (error) {
       console.log(error.message);

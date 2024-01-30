@@ -55,7 +55,7 @@ const Post = () => {
             <Link className="list-item" to={`/${post.slug}`} key={post.id}>
               <div className="blog-post">
                 <h3>{post.title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div dangerouslySetInnerHTML={{ __html: post.content.substring(0, 150) + '...'   }} />
                 <p>
                   Published at:{' '}
                   {new Date(post.published_at).toLocaleString('en-US', {

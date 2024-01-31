@@ -3,6 +3,7 @@ const cors = require('cors');
 const database = require('./db');
 const dotenv = require('dotenv');
 const { Sequelize } = require('sequelize');
+const path  = require('path')
 const router = require('./routes/blogs');
 dotenv.config();
 

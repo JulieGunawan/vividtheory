@@ -52,3 +52,7 @@ li a {
 .buttons Button {
   margin: 0 10px;
 }
+
+input{
+  width:100%;
+}

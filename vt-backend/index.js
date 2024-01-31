@@ -17,6 +17,7 @@ database
     console.log('Error: ' + err.message);
   });
 
+//create express app
 const app = express();
 
 // middleware

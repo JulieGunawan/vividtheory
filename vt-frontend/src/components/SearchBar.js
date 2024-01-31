@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 const SearchBar = () => {
   const [input, setInput] = useState('');
@@ -65,39 +67,43 @@ const SearchBar = () => {
             value={input}
             onChange={handleChange}
           />
-          <button type="submit">Search</button>
+      
         </form>
       </div>
       <div>
         <div className="searchPage">
           <h2>Search Results:</h2>
-          <div className="searchResults">
+          <Grid container spacing={2} >
             {articles.map((post) => (
-              <Link className="list-result" to={`/${post.slug}`} key={post.id}>
-                <h2>{post.title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: post.content.substring(0,150) + '...' }} />
-                <p>
+            <Grid item  xs={12} sm={6} md={4} lg={4} key={post.id} >
+              <Link className="list-result" to={`/${post.slug}`}>
+                <h3>{post.title}</h3>
+                <div className="searchContent" dangerouslySetInnerHTML={{ __html: post.content.substring(0,150) + '...' }} />
+                <div>
                   Published at:{' '}
                   {new Date(post.published_at).toLocaleString('en-US', {
                     year: 'numeric',
                     month: '2-digit',
                     day: '2-digit',
                   })}
-                </p>
+                </div>
               </Link>
+            </Grid>  
             ))}
-          </div>
-          {!isAtBeginning && (
-            <button className="previous" onClick={previousPage}>
-              prev
-            </button>
-          )}
-          {!isAtEnd && (
-            <button className="next" onClick={nextPage}>
-              next
-            </button>
-          )}
-        </div>
+          </Grid>
+          <Box sx= {{my:4}}>
+            {!isAtBeginning && (
+              <Button variant="contained" onClick={previousPage}>
+                PREV
+              </Button>
+            )}
+            {!isAtEnd && (
+              <Button variant="contained" onClick={nextPage}>
+                NEXT
+              </Button>
+            )}
+          </Box>
+       </div>
       </div>
     </>
   );

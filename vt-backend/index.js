@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => res.send('Please set to production'));
 }
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 const PORT = 5000;
 

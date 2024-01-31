@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Dialog from './Dialog';
 import Header from './Header';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 const DeleteBlogPage = () => {
   const [article, setArticle] = useState([]);
@@ -16,9 +18,10 @@ const DeleteBlogPage = () => {
   const renderBlog = async () => {
     try {
       console.log(slug);
-      const response = await fetch(`http://localhost:5000/blogs/${slug}`);
+      const response = await fetch(
+        `http://localhost:5000/blogs/getBySlug/${slug}`,
+      );
       const data = await response.json();
-      console.log(data);
       setArticle(data);
     } catch (error) {
       console.log(error.message);
@@ -92,16 +95,20 @@ const DeleteBlogPage = () => {
             day: '2-digit',
           })}
         </p>
-        {empty ? (
+        <Box display="flex" justifyContent="space-between">
+          {empty ? (
+            <Link to="/">
+              <Button variant="contained">Back</Button>
+            </Link>
+          ) : (
+            <Button onClick={handleDelete} variant="contained" color="error">
+              Delete
+            </Button>
+          )}
           <Link to="/">
-            <button>Back</button>
+            <Button variant="contained">Cancel</Button>
           </Link>
-        ) : (
-          <button onClick={handleDelete}>Delete</button>
-        )}
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+        </Box>
       </div>
       {dialog.isLoading && (
         <Dialog message={dialog.message} onConfirm={areYouSureDelete} />

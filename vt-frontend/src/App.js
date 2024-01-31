@@ -15,18 +15,18 @@ function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-        <CssBaseline />
-        <Container maxWidth="lg">
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/all-blogs" element={<AllBlogs />} />
-          <Route path="/:name" element={<Post />} />
-          {/* this needs to be checked if search will replace the Blog page */}
-          <Route path="/create" element={<AddBlogPage />} />
-          <Route path="/delete/:slug" element={<DeleteBlogPage />} />
-        </Routes>
-      </div>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/all-blogs" element={<AllBlogs />} />
+            <Route path="/:name" element={<Post />} />
+            {/* this needs to be checked if search will replace the Blog page */}
+            <Route path="/create" element={<AddBlogPage />} />
+            <Route path="/delete/:slug" element={<DeleteBlogPage />} />
+          </Routes>
+        </div>
       </Container>
     </ThemeProvider>
   );

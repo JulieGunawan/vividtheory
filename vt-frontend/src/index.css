@@ -1,10 +1,9 @@
-/* :root {
-  --font-family: "Linotype Neue Kabel", sans-serif;
-} */
-
 body {
-    background-image: linear-gradient(to right, rgba(27, 176, 188, 0.5), rgba(117, 110, 203, 0.5));
-    
+  background-image: linear-gradient(
+    to right,
+    rgba(27, 176, 188, 0.5),
+    rgba(117, 110, 203, 0.5)
+  );
 }
 
 code {
@@ -25,7 +24,6 @@ h1 {
   text-align: center;
   font-size: 64px;
   line-height: 64px;
-  /* font-family: var(--font-family); */
 }
 
 img {
@@ -34,31 +32,23 @@ img {
   display: block;
 }
 
-/* .previous {
-  background-color: #1565c0;
-  text-decoration: none;
-}
-
-.next{
-  background-color: #1565c0;
-  padding:5px 10px;
-} */
-
 ul {
   list-style-type: none;
   display: inline-flex;
-  margin-left:auto ;
+  margin-left: auto;
   padding: 0;
 }
 
 li {
   display: inline;
-  /* height: 75px; */
   vertical-align: middle;
   padding: 8px;
 }
 
 li a {
-  display:block; 
-  
+  display: block;
+}
+
+.buttons Button {
+  margin: 0 10px;
 }

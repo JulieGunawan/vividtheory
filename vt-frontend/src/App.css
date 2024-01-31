@@ -3,20 +3,7 @@
   margin: 25px auto;
 }
 
-/* .navigation {
-  display: grid;
-  grid-template-columns: 2.5fr 0.5fr 0.5fr;
-
-  will-change: background;
-} */
-
-
-
-
 .searchBar {
-  display: flex;
-  justify-content: center;
-  text-align: center;
   margin: 20px auto;
   width: 80%;
 }
@@ -35,8 +22,7 @@
   border: none;
 }
 
-
-.searchPage h2{
+.searchPage h2 {
   text-align: center;
 }
 .addBlog {

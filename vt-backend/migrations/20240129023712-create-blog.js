@@ -11,9 +11,12 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       slug: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       content: {
         type: Sequelize.TEXT,

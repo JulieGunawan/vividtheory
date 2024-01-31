@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from './Header';
 import DeleteSection from './DeleteSection';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 const Post = () => {
   const [articles, setArticles] = useState([]);
@@ -9,10 +12,10 @@ const Post = () => {
   const { name } = useParams();
   const getBlogs = async () => {
     try {
-      console.log('slug is: ' + name);
-      const response = await fetch(`http://localhost:5000/blogs/getBySlug/${name}`);
+      const response = await fetch(
+        `http://localhost:5000/blogs/getBySlug/${name}`,
+      );
       const data = await response.json();
-      // const newData = data.filter((post) => post.deleted_at == null);
       setArticles(data);
     } catch (error) {
       console.log(error.message);
@@ -32,43 +35,61 @@ const Post = () => {
   useEffect(() => {
     getBlogs();
     generateRandomBlogs();
-  }, []);
+  }, [name]);
 
   return (
     <>
-      <Header />
-      <h1>{articles.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: articles.content }} />
-      <p>
-        Published at:{' '}
-        {new Date(articles.published_at).toLocaleString('en-US', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        })}
-      </p>
-      <DeleteSection />
-      <div className="other-blogs">
-        <h3>You Might Also Like</h3>
-        {randomBlogs.map((post) => {
-          return (
-            <Link className="list-item" to={`/${post.slug}`} key={post.id}>
-              <div className="blog-post">
-                <h3>{post.title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: post.content.substring(0, 150) + '...'   }} />
-                <p>
-                  Published at:{' '}
-                  {new Date(post.published_at).toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                  })}
-                </p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      <Container maxWidth="lg">
+        <Header />
+        <h1>{articles.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: articles.content }} />
+        <p>
+          Published at:{' '}
+          {new Date(articles.published_at).toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })}
+        </p>
+        <DeleteSection />
+        <Box
+          component="span"
+          sx={{
+            display: 'block',
+            backgroundColor: 'white',
+            padding: '20px',
+            marginTop: '35px',
+          }}
+        >
+          <h3>You Might Also Like</h3>
+          <Grid container spacing={2}>
+            {randomBlogs.map((post) => {
+              return (
+                <Grid item xs={12} md={6} lg={3} key={post.id}>
+                  <Link className="list-item" to={`/${post.slug}`}>
+                    <div className="blog-post">
+                      <h3>{post.title}</h3>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: post.content.substring(0, 150) + '...',
+                        }}
+                      />
+                      <p>
+                        Published at:{' '}
+                        {new Date(post.published_at).toLocaleString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit',
+                        })}
+                      </p>
+                    </div>
+                  </Link>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      </Container>
     </>
   );
 };

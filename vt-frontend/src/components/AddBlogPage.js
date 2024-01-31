@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+// import TextField from '@mui/material/TextField';
+
 //functionality to add a Blog
 const AddBlogPage = () => {
   const [title, setTitle] = useState('');
@@ -40,61 +44,53 @@ const AddBlogPage = () => {
   return (
     <div className="addBlog">
       <Header />
-      <h2>My New Blog</h2>
+      <h2>Add My New Blog</h2>
       <form onSubmit={handleSubmit}>
-        <table>
-          <tr>
-            <td>
-              <label>Title:</label>
-            </td>
-            <td>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Content:</label>
-            </td>
-            <td>
-              <textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Slug (for SEO):</label>
-            </td>
-            <td>
-              <textarea
-                value={slug}
-                onChange={(e) => setSlug(e.target.value)}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>Image URL:</label>
-            </td>
-            <td>
-              <input
-                type="text"
-                size="40"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              />
-            </td>
-          </tr>
-        </table>
-        <Link to="/">
-          <button type="button">Cancel </button>
-        </Link>
-        <button type="submit">Submit</button>
+        <Stack
+          component="form"
+          sx={{
+            width: '80%',
+            marginBottom: '50px',
+          }}
+          spacing={2}
+          noValidate
+          autoComplete="off"
+        >
+          <label>Title:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <label>Content:</label>
+          <textarea
+            cols="100"
+            rows="10"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <label>Slug (for SEO):</label>
+          <textarea value={slug} onChange={(e) => setSlug(e.target.value)} />
+          <label>Image URL:</label>
+          <input
+            type="text"
+            size="40"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </Stack>
+
+        <div className="buttons">
+          <Link to="/">
+            <Button variant="contained" type="button">
+              Cancel{' '}
+            </Button>
+          </Link>
+          <Button variant="contained" color="success" type="submit">
+            Submit
+          </Button>
+        </div>
       </form>
     </div>
   );
